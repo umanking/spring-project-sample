@@ -6,9 +6,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 /**
  * @author Geonguk Han
  * @since 2020-01-09
@@ -22,13 +19,12 @@ public class Runner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             Post post = new Post();
             post.setTitle("title " + i);
             post.setContents("contents " + i);
             postService.savePost(post);
         }
-
 
 
     }

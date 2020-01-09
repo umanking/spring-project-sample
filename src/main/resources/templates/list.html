@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -18,28 +18,41 @@
     <tr>id</tr>
     <tr>제목</tr>
     <tr></tr>
-<!--    <tr>수정일</tr>-->
-<!--    <tr>생성일</tr>-->
+    <!--    <tr>수정일</tr>-->
+    <!--    <tr>생성일</tr>-->
 
     <tr th:each="item, iter: ${postList}">
-        <td th:text="${item.id}" id="item_id"></td>
+        <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
         <td th:text="${item.title}"></td>
         <td>
             <span>
-            <a th:href="@{'/post/edit/' + ${iter.index +1}}"><button name="btn_modify">수정</button></a>
-            <button name="btn_delete">삭제</button>
+            <!-- 수정할 때는 get방식으로 화면을 호출함 -->
+            <a th:href="@{'/post/edit/' + ${item.id}}"><button name="btn_modify">수정</button></a>
+                <!-- 삭제할 때는 javascript를 이용해서 ajax call을 함. 해당 유니크한 아이디는 attr 속성에 담아서 보낸다.-->
+            <button name="btn_delete" th:attr="value=${item.id}">삭제</button>
             </span>
         </td>
     </tr>
-
-
 </table>
 
 
 </body>
 <script th:inline="javascript">
-
     /*<![CDATA[*/
+
+    const user = /*[[${session.userName}]]*/ 'User Name';
+
+    $('[name=btn_delete]').on('click', function () {
+        const id = $(this).attr('value');
+
+        $.ajax({
+            url: '/post/delete/' + id,
+            type: 'post',
+            success: function (result) {
+                location.reload();
+            }
+        });
+    })
 
     /*$('[name=btn_modify]').on('click', function(){
         const id = $('#item_id').text()
@@ -53,7 +66,6 @@
             }
         });
     })*/
-    const user = /*[[${session.userName}]]*/ 'User Name';
 
     /*]]>*/
 </script>
