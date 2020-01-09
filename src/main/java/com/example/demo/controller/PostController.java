@@ -3,56 +3,63 @@ package com.example.demo.controller;
 import com.example.demo.domain.Post;
 import com.example.demo.service.PostService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Pageable;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author Geonguk Han
  * @since 2020-01-09
  */
 @Controller
-@RequestMapping(value = "/post")
+@Slf4j
 @AllArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
-
-
-    // 리스트 화면
-    @GetMapping
-    public String postList(Model model, Pageable pageable) {
-        model.addAttribute("postList", postService.findPostList(pageable));
-        return "post_list";
+    @GetMapping("/post")
+    public String postList(Model model) {
+        // TODO pageable 기능 추가하기
+        model.addAttribute("postList", postService.findPostList());
+        return "list";
     }
 
-    @GetMapping("/create")
-    public String postForm(@PathVariable Long id, Model model) {
-        model.addAttribute("post", postService.findById(id));
-        return "post_form";
+    @GetMapping("/post/create")
+    public String postForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "create";
     }
 
-    @PostMapping
-    public String savePost(@RequestBody Post post) {
+    @PostMapping("/post")
+    // todo : 왜 model attribute 값으로 넣나?
+    public String savePost(@ModelAttribute Post post) {
+        log.info("Save Post : {}", post);
         postService.savePost(post);
         return "redirect:/post";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/post/{id}")
     public String findPostById(@PathVariable Long id, Model model) {
         model.addAttribute("post", postService.findById(id));
-        return "post_form";
+        return "create";
     }
 
-    @PutMapping("/{id}")
-    public String modifyPostById(@PathVariable Long id, Model model) {
+    // GET 수정 화면
+    @GetMapping("/post/edit/{id}")
+    public String editView(@PathVariable Long id, Model model) {
         model.addAttribute("post", postService.findById(id));
-        return "post_list";
+        return "edit";
     }
 
-
-
+    @PostMapping("/post/edit/{id}")
+    public String updatePost(@ModelAttribute Post post) {
+        postService.savePost(post);
+        return "redirect:/post";
+    }
 
 }

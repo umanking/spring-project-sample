@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+
+<form action="#" th:action="@{'/post/edit/' + ${post.id}}" th:object="${post}" method="post">
+    <input type="text" th:value="${post.title}" name="title">
+    <input type="text" th:value="${post.contents}" name="contents">
+    <input type="submit" value="수정하기">
+ </form>
+</body>
+</html>

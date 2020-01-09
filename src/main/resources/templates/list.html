@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+<body>
+<h1>게시글 목록</h1>
+<div>
+    <form th:action="@{/post/create}">
+        <button name="btn_register">글 작성 하기</button>
+    </form>
+</div>
+
+<table>
+    <tr>id</tr>
+    <tr>제목</tr>
+    <tr></tr>
+<!--    <tr>수정일</tr>-->
+<!--    <tr>생성일</tr>-->
+
+    <tr th:each="item, iter: ${postList}">
+        <td th:text="${item.id}" id="item_id"></td>
+        <td th:text="${item.title}"></td>
+        <td>
+            <span>
+            <a th:href="@{'/post/edit/' + ${iter.index +1}}"><button name="btn_modify">수정</button></a>
+            <button name="btn_delete">삭제</button>
+            </span>
+        </td>
+    </tr>
+
+
+</table>
+
+
+</body>
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    /*$('[name=btn_modify]').on('click', function(){
+        const id = $('#item_id').text()
+        $.ajax({
+            url: '/post/' + id,
+            type: 'PUT',
+            // data: JSON,
+            success: function(data) {
+                // alert('Load was performed.');
+
+            }
+        });
+    })*/
+    const user = /*[[${session.userName}]]*/ 'User Name';
+
+    /*]]>*/
+</script>
+</html>
