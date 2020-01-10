@@ -17,10 +17,27 @@
 
 </head>
 <body>
-<h1>게시글 목록</h1>
 
 
 <div class="container">
+    <h1>게시글 목록</h1>
+    <div class="row">
+        <div class="col-lg-8">
+        </div>
+
+        <div class="col-lg-4">
+            <!-- 검색영역 -->
+            <from class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input class="form-control" type="text"/>
+                    <button type="button" class="btn btn-primary">검색</button>
+                </div>
+            </from>
+        </div>
+
+    </div>
+
+    <!--데이터 테이블-->
     <table class="table">
         <thead>
         <tr>
@@ -51,19 +68,31 @@
         </tr>
         </tbody>
     </table>
-    <div>
-        <form th:action="@{/post/create}">
-            <button class="btn btn-primary" name="btn_register">글 작성 하기</button>
-        </form>
+
+
+    <div class="row">
+        <div class="col-lg-8"></div>
+        <div class="col-lg--4">
+            <div>
+                <form th:action="@{/post/create}">
+                    <button class="btn btn-primary" name="btn_register">글 작성 하기</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item" th:each="number: ${#numbers.sequence(1, postList.totalPages ,1)}">
-                <a class="page-link" th:href="@{'/post?page=' + ${number -1}}" th:text="${number}"></a>
-            </li>
-        </ul>
-    </nav>
+
+    <!--  페이지 이동 버튼  -->
+    <div style="align-items: center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:each="number: ${#numbers.sequence(1, postList.totalPages ,1)}">
+                    <a class="page-link" th:href="@{'/post?page=' + ${number -1}}" th:text="${number}"></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 </div>
 
 
