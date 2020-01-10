@@ -56,7 +56,7 @@ public class PostController {
     @GetMapping("/post/{id}")
     public String findPostById(@PathVariable Long id, Model model) {
         model.addAttribute("post", postService.findById(id));
-        return "create";
+        return "view";
     }
 
     // GET 수정 화면

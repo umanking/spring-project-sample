@@ -38,7 +38,7 @@
     </div>
 
     <!--데이터 테이블-->
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">id</th>
@@ -51,9 +51,10 @@
         <tbody>
         <tr th:each="item, iter: ${postList}">
             <!--            <th scope="row"></th>-->
-            <td th:text="${item.id}" th:name="'item_'+${iter.index +1}"
-                id="item_id"></td>
-            <td th:text="${item.title}"></td>
+            <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
+            <a href="#">
+                <td th:text="${item.title}" th:name="item_title"></td>
+            </a>
             <td th:text="${item.createdAt}"></td>
             <td th:text="${item.updatedAt}"></td>
             <td>
@@ -62,7 +63,7 @@
                 <a th:href="@{'/post/edit/' + ${item.id}}"><button type="button" class="btn btn-primary"
                                                                    name="btn_modify">수정</button></a>
                     <!-- 삭제할 때는 javascript를 이용해서 ajax call을 함. 해당 유니크한 아이디는 attr 속성에 담아서 보낸다.-->
-                <button type="button" class="btn btn-secondary" name="btn_delete" th:attr="value=${item.id}">삭제</button>
+                <button type="button" class="btn btn-warning" name="btn_delete" th:attr="value=${item.id}">삭제</button>
                 </span>
             </td>
         </tr>
@@ -130,6 +131,18 @@
             type: 'get',
             success: function (result) {
                 location.href = '/post/search?keyword=' + search
+            }
+        })
+    })
+
+    $('[name=item_title]').on('click', function () {
+
+        const id = $('#item_id').text();
+        $.ajax({
+            url: '/post/' + id,
+            type: 'get',
+            success: function (result) {
+                location.href = '/post/' + id
             }
         })
     })

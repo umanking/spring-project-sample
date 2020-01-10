@@ -21,8 +21,8 @@ public class Runner implements ApplicationRunner {
 
         for (int i = 1; i <= 40; i++) {
             Post post = new Post();
-            post.setTitle("title " + i);
-            post.setContents("contents " + i);
+            post.setTitle("제목 " + i);
+            post.setContents("안녕하세요 컨텐츠 내용입니다. " + i);
             postService.savePost(post);
         }
 
