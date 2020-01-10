@@ -34,7 +34,8 @@
         <tbody>
         <tr th:each="item, iter: ${postList}">
             <!--            <th scope="row"></th>-->
-            <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
+            <td th:text="${item.id}" th:name="'item_'+${iter.index +1}"
+                id="item_id"></td>
             <td th:text="${item.title}"></td>
             <td th:text="${item.createdAt}"></td>
             <td th:text="${item.updatedAt}"></td>
@@ -55,6 +56,14 @@
             <button class="btn btn-primary" name="btn_register">글 작성 하기</button>
         </form>
     </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="number: ${#numbers.sequence(1, postList.totalPages ,1)}">
+                <a class="page-link" th:href="@{'/post?page=' + ${number -1}}" th:text="${number}"></a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 

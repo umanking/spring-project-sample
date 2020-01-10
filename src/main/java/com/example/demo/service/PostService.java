@@ -3,10 +3,10 @@ package com.example.demo.service;
 import com.example.demo.domain.Post;
 import com.example.demo.repository.PostRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author Geonguk Han
@@ -24,8 +24,8 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> findPostList() {
-        return postRepository.findAll();
+    public Page<Post> findPostList(Pageable pageable) {
+        return postRepository.findAll(pageable);
 
     }
 

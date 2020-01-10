@@ -19,7 +19,7 @@ public class Runner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i <= 40; i++) {
             Post post = new Post();
             post.setTitle("title " + i);
             post.setContents("contents " + i);

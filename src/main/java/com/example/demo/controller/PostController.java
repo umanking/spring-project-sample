@@ -4,6 +4,9 @@ import com.example.demo.domain.Post;
 import com.example.demo.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +26,12 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/post")
-    public String postList(Model model) {
-        // TODO pageable 기능 추가하기
-        model.addAttribute("postList", postService.findPostList());
+    public String postList(Model model, Pageable pageable) {
+        // todo: pageable 기능 추가하기
+        // todo: pageNumber & pageSize
+        Page<Post> postList = postService.findPostList(PageRequest.of(pageable.getPageNumber(), 10));
+
+        model.addAttribute("postList", postList);
         return "list";
     }
 
