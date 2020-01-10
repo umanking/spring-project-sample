@@ -3,40 +3,68 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+
+    <!--<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet">
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>-->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 <body>
 <h1>게시글 목록</h1>
-<div>
-    <form th:action="@{/post/create}">
-        <button name="btn_register">글 작성 하기</button>
-    </form>
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">제목</th>
+            <th scope="col">생성일</th>
+            <th scope="col">수정일</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iter: ${postList}">
+            <!--            <th scope="row"></th>-->
+            <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.createdAt}"></td>
+            <td th:text="${item.updatedAt}"></td>
+            <td>
+                <span>
+                <!-- 수정할 때는 get방식으로 화면을 호출함 -->
+                <a th:href="@{'/post/edit/' + ${item.id}}"><button type="button" class="btn btn-primary"
+                                                                   name="btn_modify">수정</button></a>
+                    <!-- 삭제할 때는 javascript를 이용해서 ajax call을 함. 해당 유니크한 아이디는 attr 속성에 담아서 보낸다.-->
+                <button type="button" class="btn btn-secondary" name="btn_delete" th:attr="value=${item.id}">삭제</button>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form th:action="@{/post/create}">
+            <button class="btn btn-primary" name="btn_register">글 작성 하기</button>
+        </form>
+    </div>
 </div>
 
-<table>
-    <tr>id</tr>
-    <tr>제목</tr>
-    <tr>생성일</tr>
-    <tr>수정일</tr>
-    <tr></tr>
 
-    <tr th:each="item, iter: ${postList}">
-        <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
-        <td th:text="${item.title}"></td>
-        <td th:text="${item.createdAt}"></td>
-        <td th:text="${item.updatedAt}"></td>
-        <td>
-            <span>
-            <!-- 수정할 때는 get방식으로 화면을 호출함 -->
-            <a th:href="@{'/post/edit/' + ${item.id}}"><button name="btn_modify">수정</button></a>
-                <!-- 삭제할 때는 javascript를 이용해서 ajax call을 함. 해당 유니크한 아이디는 attr 속성에 담아서 보낸다.-->
-            <button name="btn_delete" th:attr="value=${item.id}">삭제</button>
-            </span>
-        </td>
-    </tr>
-</table>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
 <script th:inline="javascript">
