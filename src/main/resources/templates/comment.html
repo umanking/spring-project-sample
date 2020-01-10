@@ -9,35 +9,18 @@
 </head>
 <body>
 
-<div class="container">
-    <form action="#" th:action="@{/post}" th:object="${post}" method="post">
-        <div class="form-group">
-            <label>제목</label>
-            <input type="text" class="form-control" th:field="*{title}" name="title">
-            <small class="form-text text-muted">제목을 입력해주세요</small>
-        </div>
-
-        <div class="form-group">
-            <label>내용</label>
-            <textarea class="form-control" th:field="*{contents}" name="contents" rows="5"/>
-        </div>
-
-        <a href="/post">
-            <button type="button" class="btn btn-primary">목록</button>
-        </a>
-    </form>
-
+<div class="container" th:fragment="comment">
     <form>
+
         <div th:each="item: ${commentList}">
             <div th:text="${item.contents}"></div>
         </div>
         <div class="form-group">
             <textarea class="form-control" name="form_comments"></textarea>
         </div>
+
         <button type="button" class="btn btn-info" name="btn_save">Comment</button>
     </form>
-
-</div>
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -52,25 +35,19 @@
     /*<![CDATA[*/
 
     $(document).ready(function () {
-        console.log('hello')
+        alert('hello')
         const postId = [[${post}]].id;
+        debugger;
 
 
         $('[name=btn_save]').on('click', function () {
-            // todo: jquery 방식이 아닌, 리액트에서 어떻게 사용하나?
             const contents = $('[name=form_comments]').val();
-
-            // todo: 리액트에서 어떻게 사용하는지구조 분해 할당
-
             const obj = {
                 writer: 'andrew',
                 contents: contents,
                 postId: postId
-            }
+            };
 
-
-            // debugger;
-            // console.log(postId)
             $.ajax({
                 url: '/comment',
                 type: 'post',
@@ -78,17 +55,17 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(obj),
                 success: function (result) {
-                    location.reload(true);
-                },
-                fail: function (result) {
-                },
-                complete: function (result) {
+                    alert('success')
                     location.reload();
-
                 }
             });
+
+            const target = $('[name=saved_comments]')
+            target.html('hello world')
         })
+
     })
+
 
     /*]]>*/
 </script>

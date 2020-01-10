@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 /**
  * @author Geonguk Han
  * @since 2020-01-09
@@ -55,7 +57,9 @@ public class PostController {
 
     @GetMapping("/post/{id}")
     public String findPostById(@PathVariable Long id, Model model) {
-        model.addAttribute("post", postService.findById(id));
+        Post byId = postService.findById(id);
+        model.addAttribute("post", byId);
+        model.addAttribute("commentList", byId.getCommentList() != null ? byId.getCommentList() : Collections.emptyList());
         return "view";
     }
 

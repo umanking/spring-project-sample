@@ -2,9 +2,8 @@ package com.example.demo.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Geonguk Han
@@ -18,8 +17,13 @@ public class Post extends BaseEntity {
     @GeneratedValue
     private Long id;
 
+    private String writer;
+
     private String title;
 
     private String contents;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Comment> commentList;
 
 }
