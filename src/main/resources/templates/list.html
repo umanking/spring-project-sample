@@ -17,13 +17,15 @@
 <table>
     <tr>id</tr>
     <tr>제목</tr>
+    <tr>생성일</tr>
+    <tr>수정일</tr>
     <tr></tr>
-    <!--    <tr>수정일</tr>-->
-    <!--    <tr>생성일</tr>-->
 
     <tr th:each="item, iter: ${postList}">
         <td th:text="${item.id}" th:name="'item_'+${iter.index +1}" id="item_id"></td>
         <td th:text="${item.title}"></td>
+        <td th:text="${item.createdAt}"></td>
+        <td th:text="${item.updatedAt}"></td>
         <td>
             <span>
             <!-- 수정할 때는 get방식으로 화면을 호출함 -->

@@ -12,9 +12,10 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class Post {
+public class Post extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String title;

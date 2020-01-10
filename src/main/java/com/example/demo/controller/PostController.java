@@ -58,7 +58,11 @@ public class PostController {
 
     @PostMapping("/post/edit/{id}")
     public String updatePost(@ModelAttribute Post post) {
-        postService.savePost(post);
+        Post byId = postService.findById(post.getId());
+        byId.setTitle(post.getTitle());
+        byId.setContents(post.getContents());
+
+        postService.savePost(byId);
         return "redirect:/post";
     }
 
