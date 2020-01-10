@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Geonguk Han
@@ -27,13 +24,20 @@ public class PostController {
 
     @GetMapping("/post")
     public String postList(Model model, Pageable pageable) {
-        // todo: pageable 기능 추가하기
-        // todo: pageNumber & pageSize
         Page<Post> postList = postService.findPostList(PageRequest.of(pageable.getPageNumber(), 10));
 
         model.addAttribute("postList", postList);
         return "list";
     }
+
+    // todo: 위에 거랑 합치기
+    @GetMapping("/post/search")
+    public String searchPost(Model model, @RequestParam String keyword, Pageable pageable) {
+        Page<Post> postList = postService.findPostByKeyword(keyword, pageable);
+        model.addAttribute("postList", postList);
+        return "list";
+    }
+
 
     @GetMapping("/post/create")
     public String postForm(Model model) {

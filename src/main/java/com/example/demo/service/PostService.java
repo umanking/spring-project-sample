@@ -39,4 +39,7 @@ public class PostService {
     }
 
 
+    public Page<Post> findPostByKeyword(String keyword, Pageable pageable) {
+        return postRepository.findPostByContentsContaining(keyword, pageable);
+    }
 }

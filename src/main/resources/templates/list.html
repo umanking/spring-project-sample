@@ -29,8 +29,8 @@
             <!-- 검색영역 -->
             <from class="form-inline">
                 <div class="form-group mx-sm-3 mb-2">
-                    <input class="form-control" type="text"/>
-                    <button type="button" class="btn btn-primary">검색</button>
+                    <input class="form-control" name="search-text" type="text"/>
+                    <button type="button" class="btn btn-primary" name="btn-search">검색</button>
                 </div>
             </from>
         </div>
@@ -122,18 +122,17 @@
         });
     })
 
-    /*$('[name=btn_modify]').on('click', function(){
-        const id = $('#item_id').text()
-        $.ajax({
-            url: '/post/' + id,
-            type: 'PUT',
-            // data: JSON,
-            success: function(data) {
-                // alert('Load was performed.');
+    $('[name=btn-search]').on('click', function () {
+        const search = $('[name=search-text]').val();
 
+        $.ajax({
+            url: '/post/search?keyword=' + search,
+            type: 'get',
+            success: function (result) {
+                location.href = '/post/search?keyword=' + search
             }
-        });
-    })*/
+        })
+    })
 
     /*]]>*/
 </script>
