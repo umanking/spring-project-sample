@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package io.github.umanking.service;
 
-import com.example.demo.domain.Post;
-import com.example.demo.repository.PostRepository;
+import io.github.umanking.domain.Post;
+import io.github.umanking.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,26 +20,26 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Post savePost(Post post) {
+    public Post savePost(final Post post) {
         return postRepository.save(post);
     }
 
-    public Page<Post> findPostList(Pageable pageable) {
+    public Page<Post> findPostList(final Pageable pageable) {
         return postRepository.findAll(pageable);
 
     }
 
-    public Post findById(Long id) {
+    public Post findById(final Long id) {
         return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Not exist post"));
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(final Long id) {
         postRepository.deleteById(id);
     }
 
 
-    public Page<Post> findPostByKeyword(String keyword, Pageable pageable) {
+    public Page<Post> findPostByKeyword(final String keyword, final Pageable pageable) {
         return postRepository.findPostByContentsContaining(keyword, pageable);
     }
 }

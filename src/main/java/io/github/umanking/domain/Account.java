@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package io.github.umanking.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;

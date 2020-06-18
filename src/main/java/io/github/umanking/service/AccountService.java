@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package io.github.umanking.service;
 
-import com.example.demo.domain.Account;
-import com.example.demo.repository.AccountRepository;
+import io.github.umanking.domain.Account;
+import io.github.umanking.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

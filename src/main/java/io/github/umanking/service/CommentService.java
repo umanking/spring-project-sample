@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package io.github.umanking.service;
 
-import com.example.demo.domain.Comment;
-import com.example.demo.repository.CommentRepository;
+import io.github.umanking.domain.Comment;
+import io.github.umanking.repository.CommentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public Comment saveComment(Comment comment) {
+    public Comment saveComment(final Comment comment) {
         return commentRepository.save(comment);
     }
 }

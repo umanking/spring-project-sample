@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package io.github.umanking.service;
 
-import com.example.demo.domain.Post;
+import io.github.umanking.domain.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,10 +17,10 @@ public class Runner implements ApplicationRunner {
     private PostService postService;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(final ApplicationArguments args) throws Exception {
 
         for (int i = 1; i <= 40; i++) {
-            Post post = new Post();
+            final Post post = new Post();
             post.setTitle("제목 " + i);
             post.setContents("안녕하세요 컨텐츠 내용입니다. " + i);
             postService.savePost(post);

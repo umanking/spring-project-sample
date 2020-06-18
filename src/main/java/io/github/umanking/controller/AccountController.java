@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package io.github.umanking.controller;
 
-import com.example.demo.domain.Account;
-import com.example.demo.service.AccountService;
+import io.github.umanking.domain.Account;
+import io.github.umanking.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

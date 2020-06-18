@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package io.github.umanking.repository;
 
-import com.example.demo.domain.Account;
+import io.github.umanking.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

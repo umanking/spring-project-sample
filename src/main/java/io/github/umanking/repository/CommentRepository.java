@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package io.github.umanking.repository;
 
-import com.example.demo.domain.Comment;
+import io.github.umanking.domain.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
