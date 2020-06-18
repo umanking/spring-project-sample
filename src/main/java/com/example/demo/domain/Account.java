@@ -3,6 +3,7 @@ package com.example.demo.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,11 +32,23 @@ public class Account extends BaseEntity {
     private String password;
 
     @NotNull(message = "must not be null")
+    private String confirmPassword;
+
+    @NotNull(message = "must not be null")
     private String name;
 
     // todo: @Pattern
     @NotNull(message = "must not be null")
     private String phoneNumber;
+
+    public Account(final String email, final String password, final String confirmPassword, final String name, final String phoneNumber) {
+        // todo: validation phone_number
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     public void updateAccount(final Account newAccount) {
         if (newAccount.getEmail() != null) {
@@ -48,6 +61,14 @@ public class Account extends BaseEntity {
 
         if (newAccount.getPhoneNumber() != null) {
             this.phoneNumber = newAccount.getPhoneNumber();
+        }
+    }
+
+    public void checkConfirmPassword() {
+        if (!StringUtils.isEmpty(this.password) && !StringUtils.isEmpty(this.confirmPassword)) {
+            if (!this.password.equals(this.confirmPassword)) {
+                throw new RuntimeException("check your password");
+            }
         }
     }
 }

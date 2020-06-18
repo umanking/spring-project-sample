@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * @author Geonguk Han
  * @since 2020-06-18
@@ -18,7 +20,16 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public Account createAccount(final Account account) {
+        checkExistEmail(account.getEmail());
+        account.checkConfirmPassword();
         return accountRepository.save(account);
+    }
+
+    private void checkExistEmail(final String email) {
+        final Optional<Account> optionalAccount = accountRepository.findByEmail(email);
+        if (optionalAccount.isPresent()) {
+            throw new RuntimeException("Already exist email : " + email);
+        }
     }
 
     public Account getAccount(final Long id) {
