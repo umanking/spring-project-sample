@@ -4,8 +4,10 @@ import io.github.umanking.domain.Account;
 import io.github.umanking.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,26 +18,26 @@ import javax.validation.Valid;
  * @since 2020-06-18
  */
 @Controller
-@RequestMapping("/account")
 @RequiredArgsConstructor
 public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping
-    public String showAccountForm() {
-        return "account";
+    @GetMapping(value = "/account")
+    public String showAccountForm(Model model) {
+        model.addAttribute("account", new Account());
+        return "account_register";
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createAccount(@RequestBody @Valid final Account account,
-                                           final BindingResult bindingResult) {
+    @PostMapping(value = "/account")
+    public String createAccount(@Valid final Account account, final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // todo: specific exception handling
             throw new RuntimeException(bindingResult.getFieldError().getDefaultMessage());
         }
 
-        return ResponseEntity.ok(accountService.createAccount(account));
+        accountService.createAccount(account);
+        return "redirect:/";
     }
+
 }

@@ -3,6 +3,7 @@ package io.github.umanking.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 public class Account extends BaseEntity {
 
     @Id
@@ -40,6 +41,9 @@ public class Account extends BaseEntity {
     // todo: @Pattern
     @NotNull(message = "must not be null")
     private String phoneNumber;
+
+    public Account() {
+    }
 
     public Account(final String email, final String password, final String confirmPassword, final String name, final String phoneNumber) {
         // todo: validation phone_number

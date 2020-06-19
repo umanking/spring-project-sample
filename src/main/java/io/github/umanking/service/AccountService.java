@@ -20,6 +20,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public Account createAccount(final Account account) {
+        // todo:refactoring
         checkExistEmail(account.getEmail());
         account.checkConfirmPassword();
         return accountRepository.save(account);

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Title</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
+</head>
+<body>
+
+<div>
+    <h1>Account Register From</h1>
+    <form method="POST" th:action="@{/account}" th:object="${account}">
+        <label>email</label> <input name="email" type="text" th:field="*{email}"/> <br/>
+        <label>password</label> <input name="password" type="password" th:field="*{password}"/><br/>
+        <label>confirm password</label> <input name="confirm_password" type="password" th:field="*{confirmPassword}"/><br/>
+        <label>name</label> <input name="name" type="text" th:field="*{name}"/><br/>
+        <label>phone number</label> <input name="phone_number" type="text" th:field="*{phoneNumber}"/><br/>
+        <input name="register_button" type="submit">register</input>
+    </form>
+</div>
+
+<script crossorigin="anonymous"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script th:inline="javascript">
+  /*<![CDATA[*/
+
+  $(document).ready(function () {
+
+
+  });
+
+  /*]]>*/
+</script>
+
+
+</body>
+</html>
