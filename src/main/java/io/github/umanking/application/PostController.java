@@ -1,7 +1,7 @@
-package io.github.umanking.controller;
+package io.github.umanking.application;
 
-import io.github.umanking.domain.Post;
-import io.github.umanking.service.PostService;
+import io.github.umanking.domain.post.Post;
+import io.github.umanking.domain.post.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

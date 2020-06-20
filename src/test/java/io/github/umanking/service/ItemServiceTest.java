@@ -1,7 +1,8 @@
 package io.github.umanking.service;
 
 import io.github.umanking.domain.item.Item;
-import io.github.umanking.repository.ItemRepository;
+import io.github.umanking.domain.item.ItemRepository;
+import io.github.umanking.domain.item.ItemService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

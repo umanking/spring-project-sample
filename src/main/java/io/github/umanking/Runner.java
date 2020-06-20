@@ -1,6 +1,7 @@
-package io.github.umanking.service;
+package io.github.umanking;
 
-import io.github.umanking.domain.Post;
+import io.github.umanking.domain.post.Post;
+import io.github.umanking.domain.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

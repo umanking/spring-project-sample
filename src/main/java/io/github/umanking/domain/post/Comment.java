@@ -1,5 +1,6 @@
-package io.github.umanking.domain;
+package io.github.umanking.domain.post;
 
+import io.github.umanking.domain.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;

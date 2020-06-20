@@ -1,8 +1,7 @@
-package io.github.umanking.controller;
+package io.github.umanking.application;
 
-import io.github.umanking.domain.account.Account;
-import io.github.umanking.service.AccountService;
-import lombok.RequiredArgsConstructor;
+import io.github.umanking.domain.user.User;
+import io.github.umanking.domain.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,25 +15,28 @@ import javax.validation.Valid;
  * @since 2020-06-18
  */
 @Controller
-@RequiredArgsConstructor
-public class AccountController {
+public class UserController {
 
-    private final AccountService accountService;
+    private final UserService userService;
+
+    public UserController(final UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/account")
     public String showAccountForm(final Model model) {
-        model.addAttribute("account", new Account());
-        return "account_register";
+        model.addAttribute("account", new User());
+        return "user_register_form";
     }
 
     @PostMapping(value = "/account")
-    public String createAccount(@Valid final Account account, final BindingResult bindingResult) {
+    public String createAccount(@Valid final User user, final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // todo: specific exception handling
             throw new RuntimeException(bindingResult.getFieldError().getDefaultMessage());
         }
 
-        accountService.createAccount(account);
+        userService.createAccount(user);
         return "redirect:/";
     }
 

@@ -1,7 +1,5 @@
-package io.github.umanking.service;
+package io.github.umanking.domain.post;
 
-import io.github.umanking.domain.Comment;
-import io.github.umanking.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

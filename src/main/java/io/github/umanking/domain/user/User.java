@@ -1,4 +1,4 @@
-package io.github.umanking.domain.account;
+package io.github.umanking.domain.user;
 
 import io.github.umanking.domain.BaseEntity;
 import lombok.Data;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Data
-public class Account extends BaseEntity {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,14 +39,14 @@ public class Account extends BaseEntity {
     @NotNull(message = "must not be null")
     private String phoneNumber;
 
-    public Account() {
+    public User() {
     }
 
-    public Account(final String email,
-                   final String password,
-                   final String confirmPassword,
-                   final String name,
-                   final String phoneNumber) {
+    public User(final String email,
+                final String password,
+                final String confirmPassword,
+                final String name,
+                final String phoneNumber) {
 
         // todo: validation phone_number
         this.email = email;
@@ -56,17 +56,17 @@ public class Account extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public void updateAccount(final Account newAccount) {
-        if (newAccount.getEmail() != null) {
-            this.email = newAccount.getEmail();
+    public void updateAccount(final User newUser) {
+        if (newUser.getEmail() != null) {
+            this.email = newUser.getEmail();
         }
 
-        if (newAccount.getName() != null) {
-            this.name = newAccount.getName();
+        if (newUser.getName() != null) {
+            this.name = newUser.getName();
         }
 
-        if (newAccount.getPhoneNumber() != null) {
-            this.phoneNumber = newAccount.getPhoneNumber();
+        if (newUser.getPhoneNumber() != null) {
+            this.phoneNumber = newUser.getPhoneNumber();
         }
     }
 

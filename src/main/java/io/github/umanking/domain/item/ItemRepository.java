@@ -1,6 +1,5 @@
-package io.github.umanking.repository;
+package io.github.umanking.domain.item;
 
-import io.github.umanking.domain.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

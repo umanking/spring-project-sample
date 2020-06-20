@@ -1,6 +1,5 @@
-package io.github.umanking.repository;
+package io.github.umanking.domain.post;
 
-import io.github.umanking.domain.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,5 @@
-package io.github.umanking.service;
+package io.github.umanking.domain.post;
 
-import io.github.umanking.domain.Post;
-import io.github.umanking.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

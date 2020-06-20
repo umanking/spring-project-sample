@@ -1,7 +1,7 @@
 package io.github.umanking.domain.order;
 
 import io.github.umanking.domain.BaseEntity;
-import io.github.umanking.domain.account.Account;
+import io.github.umanking.domain.user.User;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ public class Order extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    private Account account;
+    private User user;
 
     private OrderItem orderItem;
 
