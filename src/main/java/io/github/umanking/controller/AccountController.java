@@ -1,15 +1,13 @@
 package io.github.umanking.controller;
 
-import io.github.umanking.domain.Account;
+import io.github.umanking.domain.account.Account;
 import io.github.umanking.service.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
@@ -24,7 +22,7 @@ public class AccountController {
     private final AccountService accountService;
 
     @GetMapping(value = "/account")
-    public String showAccountForm(Model model) {
+    public String showAccountForm(final Model model) {
         model.addAttribute("account", new Account());
         return "account_register";
     }

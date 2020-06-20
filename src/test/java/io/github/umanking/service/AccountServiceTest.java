@@ -1,7 +1,8 @@
 package io.github.umanking.service;
 
-import io.github.umanking.domain.Account;
+import io.github.umanking.domain.account.Account;
 import io.github.umanking.repository.AccountRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,11 +26,16 @@ class AccountServiceTest {
 
     @Mock
     AccountRepository accountRepository;
+    private Account account;
+
+    @BeforeEach
+    void setUp() {
+        account = account();
+    }
 
     @Test
     void createAccount() {
         // given
-        final Account account = account();
         given(accountRepository.findByEmail(account.getEmail())).willReturn(Optional.empty());
         given(accountRepository.save(account)).willReturn(account);
 
@@ -44,10 +50,6 @@ class AccountServiceTest {
         assertThat(savedAccount.getPassword()).isEqualTo(account.getPassword());
     }
 
-    private Account account() {
-        return new Account("umanking@gmail.com", "1234", "1234", "한건국", "01084604141");
-    }
-
     @Test
     void getAccount() {
     }
@@ -58,5 +60,9 @@ class AccountServiceTest {
 
     @Test
     void deleteAccount() {
+    }
+
+    private Account account() {
+        return new Account("umanking@gmail.com", "1234", "1234", "한건국", "01084604141");
     }
 }

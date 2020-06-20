@@ -1,9 +1,7 @@
-package io.github.umanking.domain;
+package io.github.umanking.domain.account;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.github.umanking.domain.BaseEntity;
+import lombok.Data;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Entity;
@@ -18,8 +16,7 @@ import javax.validation.constraints.NotNull;
  * @since 2020-06-18
  */
 @Entity
-@Getter
-@Setter
+@Data
 public class Account extends BaseEntity {
 
     @Id
@@ -45,7 +42,12 @@ public class Account extends BaseEntity {
     public Account() {
     }
 
-    public Account(final String email, final String password, final String confirmPassword, final String name, final String phoneNumber) {
+    public Account(final String email,
+                   final String password,
+                   final String confirmPassword,
+                   final String name,
+                   final String phoneNumber) {
+
         // todo: validation phone_number
         this.email = email;
         this.password = password;

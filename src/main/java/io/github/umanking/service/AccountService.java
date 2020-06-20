@@ -1,10 +1,9 @@
 package io.github.umanking.service;
 
-import io.github.umanking.domain.Account;
+import io.github.umanking.domain.account.Account;
 import io.github.umanking.repository.AccountRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -13,11 +12,14 @@ import java.util.Optional;
  * @since 2020-06-18
  */
 @Service
-@Transactional
-@RequiredArgsConstructor
+@Slf4j
 public class AccountService {
 
     private final AccountRepository accountRepository;
+
+    public AccountService(final AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     public Account createAccount(final Account account) {
         // todo:refactoring

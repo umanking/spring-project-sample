@@ -2,7 +2,6 @@ package io.github.umanking.service;
 
 import io.github.umanking.domain.Comment;
 import io.github.umanking.repository.CommentRepository;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Slf4j
-@AllArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
+
+    public CommentService(final CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
+    }
 
     @Transactional
     public Comment saveComment(final Comment comment) {
