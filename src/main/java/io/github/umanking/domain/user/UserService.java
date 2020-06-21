@@ -33,13 +33,9 @@ public class UserService {
         }
     }
 
-    public User getAccount(final Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not exist account id :" + id));
-    }
-
     public User modifyAccount(final Long id, final User newUser) {
-        final User existUser = getAccount(id);
+        final User existUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not exist account id :" + id));
         existUser.updateAccount(newUser);
         return userRepository.save(existUser);
     }

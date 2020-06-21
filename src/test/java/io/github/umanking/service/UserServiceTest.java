@@ -13,8 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 
 /**
  * @author Geonguk Han
@@ -28,7 +31,7 @@ class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
-    
+
     private User user;
 
     @BeforeEach
@@ -50,15 +53,35 @@ class UserServiceTest {
     }
 
     @Test
-    void getAccount() {
+    void modifyAccount() {
         // given
+        final User modifiedUser = this.user;
+        modifiedUser.setEmail("gg.han@gamil.com");
+
         given(userRepository.findById(anyLong())).willReturn(Optional.of(user));
+        given(userRepository.save(any())).willReturn(modifiedUser);
 
         // when
-        final User actual = userService.getAccount(anyLong());
+        final User actual = userService.modifyAccount(anyLong(), modifiedUser);
 
         // then
-        assertUser(actual, user);
+        assertThat(actual.getEmail()).isEqualTo(modifiedUser.getEmail());
+    }
+
+    @Test
+    void deleteAccount() {
+        // given
+        doNothing().when(userRepository).deleteById(any());
+
+        // when
+        userService.deleteAccount(any());
+
+        // then
+        verify(userRepository).deleteById(any());
+    }
+
+    private User account() {
+        return new User("umanking@gmail.com", "1234", "1234", "한건국", "01084604141");
     }
 
     private void assertUser(final User actual, final User expected) {
@@ -67,17 +90,5 @@ class UserServiceTest {
         assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
         assertThat(actual.getPhoneNumber()).isEqualTo(expected.getPhoneNumber());
         assertThat(actual.getPassword()).isEqualTo(expected.getPassword());
-    }
-
-    @Test
-    void modifyAccount() {
-    }
-
-    @Test
-    void deleteAccount() {
-    }
-
-    private User account() {
-        return new User("umanking@gmail.com", "1234", "1234", "한건국", "01084604141");
     }
 }
