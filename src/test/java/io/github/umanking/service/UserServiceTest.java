@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
 /**
@@ -27,6 +28,7 @@ class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
+    
     private User user;
 
     @BeforeEach
@@ -44,15 +46,27 @@ class UserServiceTest {
         final User savedUser = userService.createAccount(user);
 
         // then
-        assertThat(savedUser).isNotNull();
-        assertThat(savedUser.getEmail()).isEqualTo(user.getEmail());
-        assertThat(savedUser.getName()).isEqualTo(user.getName());
-        assertThat(savedUser.getPhoneNumber()).isEqualTo(user.getPhoneNumber());
-        assertThat(savedUser.getPassword()).isEqualTo(user.getPassword());
+        assertUser(savedUser, user);
     }
 
     @Test
     void getAccount() {
+        // given
+        given(userRepository.findById(anyLong())).willReturn(Optional.of(user));
+
+        // when
+        final User actual = userService.getAccount(anyLong());
+
+        // then
+        assertUser(actual, user);
+    }
+
+    private void assertUser(final User actual, final User expected) {
+        assertThat(actual).isNotNull();
+        assertThat(actual.getName()).isEqualTo(expected.getName());
+        assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
+        assertThat(actual.getPhoneNumber()).isEqualTo(expected.getPhoneNumber());
+        assertThat(actual.getPassword()).isEqualTo(expected.getPassword());
     }
 
     @Test
