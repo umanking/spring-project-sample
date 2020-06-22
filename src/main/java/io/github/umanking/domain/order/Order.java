@@ -4,9 +4,10 @@ import io.github.umanking.domain.BaseEntity;
 import io.github.umanking.domain.user.User;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Geonguk Han
@@ -20,11 +21,16 @@ public class Order extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    private User user;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    private OrderItem orderItem;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus = OrderStatus.ORDER_COMPLETE;
 
-    private OrderStatus orderStatus;
+    private LocalDateTime orderDate = LocalDateTime.now();
 
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
 
+    }
 }

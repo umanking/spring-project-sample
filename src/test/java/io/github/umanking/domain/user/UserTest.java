@@ -20,7 +20,7 @@ class UserTest {
         // when
         user.updateAccount(newUser);
 
-        // 변경된 것
+        // then
         assertThat(user.getEmail()).isEqualTo(newUser.getEmail());
         assertThat(user.getName()).isEqualTo(newUser.getName());
     }
@@ -30,7 +30,7 @@ class UserTest {
         // given
         final User user = new User("umanking@gmail.com", "1234", "4321", "andrew", "01012341234");
 
-        // when then
+        // when, then
         assertThrows(RuntimeException.class, () -> user.checkConfirmPassword());
     }
 }

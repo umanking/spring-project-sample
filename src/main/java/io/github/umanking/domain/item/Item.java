@@ -29,6 +29,9 @@ public class Item extends BaseEntity {
 
     private int stockQuantity;
 
+    public Item() {
+    }
+
     public Item(final String name, final BigDecimal price, final int stockQuantity) {
         this.name = name;
         this.price = price;

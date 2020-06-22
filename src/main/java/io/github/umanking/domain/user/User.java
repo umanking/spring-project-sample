@@ -1,15 +1,16 @@
 package io.github.umanking.domain.user;
 
 import io.github.umanking.domain.BaseEntity;
+import io.github.umanking.domain.order.Order;
+import io.github.umanking.domain.order.OrderItem;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Geonguk Han
@@ -38,6 +39,9 @@ public class User extends BaseEntity {
     // todo: @Pattern
     @NotNull(message = "must not be null")
     private String phoneNumber;
+
+    @OneToMany
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     public User() {
     }
