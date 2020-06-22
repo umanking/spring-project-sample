@@ -1,4 +1,4 @@
-package io.github.umanking.service;
+package io.github.umanking.domain.user;
 
 import io.github.umanking.domain.user.User;
 import io.github.umanking.domain.user.UserRepository;

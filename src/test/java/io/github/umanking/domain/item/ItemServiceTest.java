@@ -1,4 +1,4 @@
-package io.github.umanking.service;
+package io.github.umanking.domain.item;
 
 import io.github.umanking.domain.item.Item;
 import io.github.umanking.domain.item.ItemRepository;
