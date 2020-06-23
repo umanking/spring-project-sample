@@ -70,5 +70,7 @@ class OrderServiceTest {
 
         // then
         assertThat(actual).isNotNull();
+        assertThat(actual.getOrderStatus()).isEqualTo(order.getOrderStatus());
+        assertThat(actual.getOrderItems().size()).isEqualTo(2);
     }
 }

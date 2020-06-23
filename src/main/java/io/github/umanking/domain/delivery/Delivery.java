@@ -20,6 +20,6 @@ public class Delivery extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    private Order order;
+//    private Order order;
 
 }

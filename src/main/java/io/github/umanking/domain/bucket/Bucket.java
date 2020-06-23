@@ -23,7 +23,7 @@ public class Bucket extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    private Item item;
+//    private Item item;
 
     private BigDecimal totalPrice;
 
