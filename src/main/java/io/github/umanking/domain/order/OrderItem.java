@@ -29,7 +29,17 @@ public class OrderItem extends BaseEntity {
     private Item item;
 
     private BigDecimal orderPrice;
+
     private int count;
 
+    public void validatePrice() {
+        final BigDecimal totalPrice = getMultiply();
+        if (totalPrice.compareTo(BigDecimal.ZERO) == 0) {
+            throw new RuntimeException("invalid total price");
+        }
+    }
 
+    public BigDecimal getMultiply() {
+        return this.orderPrice.multiply(BigDecimal.valueOf(count));
+    }
 }

@@ -31,6 +31,7 @@ class OrderServiceTest {
 
     @Test
     void processOrder() {
+        // givne
         final Item macbookPro = new Item();
         macbookPro.setId(1L);
         macbookPro.setName("맥북 프로");
@@ -42,7 +43,6 @@ class OrderServiceTest {
         cookedRice.setName("햇반");
         cookedRice.setPrice(BigDecimal.valueOf(30000));
         cookedRice.setStockQuantity(1000);
-
 
         final OrderItem orderItem = new OrderItem();
         orderItem.setId(1L);

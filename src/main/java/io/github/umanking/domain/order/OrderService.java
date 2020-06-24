@@ -23,10 +23,7 @@ public class OrderService {
     public Order processOrder(Order order) {
         final List<OrderItem> orderItems = order.getOrderItems();
         for (OrderItem orderItem : orderItems) {
-            final BigDecimal totalPrice = orderItem.getOrderPrice().multiply(BigDecimal.valueOf(orderItem.getCount()));
-            if (totalPrice.intValue() <= BigDecimal.ZERO.intValue()) {
-                throw new RuntimeException("금액이 잘 못 계산되었습니다.");
-            }
+            orderItem.validatePrice();
         }
         return orderRepository.save(order);
     }

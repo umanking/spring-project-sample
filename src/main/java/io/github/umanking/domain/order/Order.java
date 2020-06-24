@@ -5,6 +5,7 @@ import io.github.umanking.domain.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class Order extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    private BigDecimal totalOrderPrice;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.ORDER_COMPLETE;
 
@@ -31,6 +34,10 @@ public class Order extends BaseEntity {
 
     public void addOrderItem(OrderItem orderItem) {
         this.orderItems.add(orderItem);
+    }
 
+    public BigDecimal getTotalOrderPrice() {
+        orderItems.forEach(orderItem -> totalOrderPrice.add(orderItem.getMultiply()));
+        return totalOrderPrice;
     }
 }
