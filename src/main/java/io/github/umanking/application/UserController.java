@@ -23,13 +23,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/account")
-    public String showAccountForm(final Model model) {
-        model.addAttribute("account", new User());
-        return "user_register_form";
+    @GetMapping(value = "/register")
+    public String showRegisterForm(final Model model) {
+        model.addAttribute("user", new User());
+        return "registerForm";
     }
 
-    @PostMapping(value = "/account")
+    @PostMapping(value = "/register")
     public String createAccount(@Valid final User user, final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             // todo: specific exception handling

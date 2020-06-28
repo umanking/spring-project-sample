@@ -10,14 +10,22 @@
 
 <div>
     <h1>Account Register From</h1>
-    <form method="POST" th:action="@{/user}" th:object="${user}">
+    <form method="POST" th:action="@{/register}" th:object="${user}">
         <label>email</label> <input name="email" type="text" th:field="*{email}"/> <br/>
+
+
         <label>password</label> <input name="password" type="password" th:field="*{password}"/><br/>
+        <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+
+
         <label>confirm password</label> <input name="confirm_password" type="password"
                                                th:field="*{confirmPassword}"/><br/>
+        <span class="error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+
+
         <label>name</label> <input name="name" type="text" th:field="*{name}"/><br/>
         <label>phone number</label> <input name="phone_number" type="text" th:field="*{phoneNumber}"/><br/>
-        <input name="register_button" type="submit">register</input>
+        <input name="register_button" type="submit" value="회원가입"></input>
     </form>
 </div>
 
